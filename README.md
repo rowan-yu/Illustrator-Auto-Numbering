@@ -1,4 +1,4 @@
-# ClickNumber & ClickLetter for Adobe Illustrator
+# ClickLabel for Adobe Illustrator
 
 **Auto-increment numbering & lettering tools for Adobe Illustrator** — Draw a shape, run the script, get a sequential number or letter. Repeat.
 
@@ -18,6 +18,62 @@ Illustrator has no built-in "click to place sequential numbers or letters" featu
 
 ---
 
+## Installation
+
+### Quick Install (Windows)
+
+1. Download the latest release (`ClickLabel.zip`)
+2. Extract the zip
+3. **Right-click `Install.bat` → Run as administrator**
+4. The installer will auto-detect your Illustrator version and language
+5. Restart Illustrator — done!
+
+```
+ClickLabel/
+├── Install.bat              ← Double-click to install
+├── Uninstall.bat            ← Double-click to uninstall
+├── README.md
+├── LICENSE
+├── scripts/
+│   ├── ClickNumber_v2.jsx        (Chinese UI)
+│   ├── ClickNumber_v2_EN.jsx     (English UI)
+│   └── ClickLetter.jsx           (English UI)
+└── hotkeys/
+    ├── ClickNumber_Hotkey.ahk    (F2 shortcut)
+    └── ClickLetter_Hotkey.ahk    (F3 shortcut)
+```
+
+The installer will:
+- Auto-detect your Illustrator installation (2023 / 2024 / 2025)
+- Auto-detect your language folder (Chinese / English)
+- Copy scripts to the correct directory
+- Update hotkey file paths automatically
+- Optionally add hotkeys to Windows startup
+
+### Manual Install
+
+Copy the `.jsx` files from the `scripts/` folder to your Illustrator scripts folder:
+
+**Windows:**
+```
+C:\Program Files\Adobe\Adobe Illustrator 2025\Presets\zh_CN\脚本\
+```
+
+**macOS:**
+```
+/Applications/Adobe Illustrator 2025/Presets/zh_CN/脚本/
+```
+
+> For English versions, replace `zh_CN\脚本` with `en_US\Scripts`.
+
+Restart Illustrator. Scripts appear under **File → Scripts**.
+
+### Uninstall
+
+Run `Uninstall.bat` — it removes all scripts and startup entries cleanly.
+
+---
+
 ## Features
 
 ### ClickNumber
@@ -32,34 +88,16 @@ Illustrator has no built-in "click to place sequential numbers or letters" featu
 
 ### Shared Features
 - **Batch labeling** — Select multiple shapes at once, all get labeled in order (top-to-bottom, left-to-right)
-- **Persistent config** — Settings are saved in the document, survive save/close/reopen
+- **Persistent config** — Settings saved in the document, survive save/close/reopen
 - **Reset anytime** — Run without selection to view status, change the current value, or reset
 
 ---
 
-## Quick Start
+## Usage
 
-### 1. Install the Scripts
+### First Run — Configure
 
-Copy the `.jsx` files to your Illustrator scripts folder:
-
-**Windows:**
-```
-C:\Program Files\Adobe\Adobe Illustrator 2025\Presets\zh_CN\脚本\
-```
-
-**macOS:**
-```
-/Applications/Adobe Illustrator 2025/Presets/zh_CN/脚本/
-```
-
-> For English versions of Illustrator, replace `zh_CN\脚本` with `en_US\Scripts`.
-
-Restart Illustrator. The scripts appear under **File → Scripts**.
-
-### 2. First Run — Configure
-
-Run a script via **File → Scripts**. A setup dialog appears:
+Run a script via **File → Scripts** (or press F2/F3). A setup dialog appears:
 
 **ClickNumber settings:**
 
@@ -81,52 +119,32 @@ Run a script via **File → Scripts**. A setup dialog appears:
 | Text Color | Red / Black / White / Blue |
 | Case | Uppercase (A, B, C) or Lowercase (a, b, c) |
 
-### 3. Place Labels
+### Place Labels
 
 1. Use the **Selection Tool (V)** to draw a small rectangle or circle where you want a label
 2. Keep it selected
-3. Run the script (or press your shortcut key)
-4. The shape is replaced with the current number/letter
+3. Press **F2** (number) or **F3** (letter)
+4. The shape is replaced with the current label
 5. Repeat — the value auto-increments
 
-### 4. Batch Mode
+### Batch Mode
 
 Select multiple shapes at once → Run the script → All shapes are replaced with sequential labels, ordered top-to-bottom, left-to-right.
 
 ---
 
-## Shortcut Keys with AutoHotkey (Recommended)
+## Shortcut Keys
 
-Included `.ahk` scripts let you trigger numbering/lettering with a single key press. Requires [AutoHotkey v2](https://www.autohotkey.com/) on Windows.
+Included `.ahk` scripts provide single-key shortcuts. Requires [AutoHotkey v2](https://www.autohotkey.com/) on Windows.
 
 | Shortcut | Action |
 |----------|--------|
-| **F2** | Place next number (ClickNumber) |
-| **F3** | Place next letter (ClickLetter) |
+| **F2** | Place next number |
+| **F3** | Place next letter |
 
-### Setup
+Shortcuts only activate inside the Illustrator window.
 
-1. Install [AutoHotkey v2](https://www.autohotkey.com/)
-2. Verify the script paths in each `.ahk` file match your Illustrator install location
-3. Double-click both `.ahk` files to run (green H icons appear in system tray)
-4. Switch to Illustrator — **F2** for numbers, **F3** for letters
-
-Shortcuts only activate inside the Illustrator window and won't interfere with other apps.
-
-**Auto-start on boot:** Press `Win+R`, type `shell:startup`, and place shortcuts to both `.ahk` files in the folder.
-
----
-
-## Files
-
-| File | Description |
-|------|-------------|
-| `ClickNumber_v2.jsx` | Number script (Chinese UI) |
-| `ClickNumber_v2_EN.jsx` | Number script (English UI) |
-| `ClickLetter.jsx` | Letter script (English UI) |
-| `ClickNumber_Hotkey.ahk` | F2 shortcut for numbers (Windows) |
-| `ClickLetter_Hotkey.ahk` | F3 shortcut for letters (Windows) |
-| `AutoNumber.jsx` | Legacy version with coordinate input |
+> The installer can optionally add hotkeys to Windows startup so they're always ready.
 
 ---
 
@@ -136,12 +154,15 @@ Each script stores its configuration (current value, prefix, suffix, etc.) in a 
 
 - Config persists when you save and reopen the document
 - Each document has its own independent numbering/lettering
-- ClickNumber and ClickLetter configs are independent — they don't interfere with each other
+- ClickNumber and ClickLetter use separate configs — they don't interfere with each other
 - Run a script with nothing selected to view/edit/reset its config
 
 ---
 
 ## Troubleshooting
+
+**Install.bat says "could not detect Illustrator"**
+→ Enter your install path manually when prompted (e.g. `C:\Program Files\Adobe\Adobe Illustrator 2025`).
 
 **Script doesn't appear in File → Scripts**
 → Make sure the `.jsx` file is in the correct Presets folder and restart Illustrator.
@@ -152,10 +173,10 @@ Each script stores its configuration (current value, prefix, suffix, etc.) in a 
 **Want to start over**
 → Run with nothing selected → Click "Reset All".
 
-**AutoHotkey script shows error**
-→ Check that the `ScriptPath` in the `.ahk` file matches your actual Illustrator install path.
+**F2/F3 not working**
+→ Make sure AutoHotkey v2 is installed and the `.ahk` files are running (green H in system tray). Check that the script path inside the `.ahk` file is correct.
 
-**Both scripts running at the same time?**
+**Can I use both at the same time?**
 → Yes! They use separate configs. F2 for numbers and F3 for letters work independently.
 
 ---
@@ -168,4 +189,10 @@ MIT — free to use, modify, and distribute.
 
 ## Contributing
 
-Issues and pull requests are welcome. If you have ideas for new features (e.g. Roman numerals, circular badges, custom fonts, arrow leaders), feel free to open an issue.
+Issues and pull requests are welcome. Ideas for future features:
+
+- Roman numeral mode (I, II, III...)
+- Circular badge backgrounds
+- Custom font selection
+- Arrow leaders / callout lines
+- macOS installer script
